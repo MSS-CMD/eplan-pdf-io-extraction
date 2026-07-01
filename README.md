@@ -1,4 +1,3 @@
-
 # EPLAN PDF I/O 表提取
 
 从 EPLAN 生成的电气图纸 PDF（557页级）中，自动提取全部 PLC I/O 点，生成结构化 Excel 表格，用于 TIA Portal / 汇川 / 三菱 等 PLC 编程。
@@ -213,15 +212,6 @@ noise_patterns = [
 3. **阀岛型号不同**：调整信号名匹配模式（SXXXX, CXXXX 等前缀可能不同）
 4. **页面布局差异**：先打印几页的位置数据，调整 column bounds 参数
 
-## GitHub 同类项目参考
-
-| 项目 | ⭐ | 说明 |
-|------|:--:|------|
-| **`andrefdre/EplanInOut2xlsx`** | 0 | 葡萄牙语 EPLAN I/O 提取，用固定裁切框（Rect），不支持 IOLINK/阀岛/AI/中文 |
-| **`xavctn/img2table`** | 876 | 通用 PDF 表格识别（基于 OpenCV），适合扫描件但非 EPLAN 专用 |
-| **`Baskar-forever/TableExtractor-Advanced-PDF-Table-Extraction`** | 45 | 高级 PDF 表格提取，非电气图纸专用 |
-
-> 当前技能在功能完备度和中文适配方面领先于 GitHub 上已知的开源方案。
 
 ## 引用文件
 
