@@ -1,0 +1,87 @@
+# ============================================================
+# EPLAN PDF I/O 提取 — 项目配置
+# 项目: 徐工CTP4.0高速线 PLC3-电芯包膜
+# 版本: v1.0
+# ============================================================
+project:
+  name: "徐工模组&PACK装配线L2_PLC3-电芯包膜"
+
+page_detect:
+  DI: ["数字量输入模块 16位"]
+  DQ: ["数字量输出模块 16位"]
+  SAFETY_IN: ["安全输入模块 8位"]
+  SAFETY_OUT: ["安全输出模块 4位"]
+
+address_patterns:
+  DI: 'I\d{4}\.\d'
+  DQ: 'Q\d{4}\.\d'
+  SAFETY_IN: 'I10[5-9]\d\.\d'
+  SAFETY_OUT: 'Q1110\.\d'
+
+# ========== 页面布局参数（标准EPLAN 8列布局） ==========
+page_layout:
+  DI:
+    bit_label_y: 571
+    address_y: 589
+    device_tag_y: 598
+    desc_y_start: 682
+    desc_y_end: 715
+    bit_label: "DI Bit"
+    columns: 8
+    col_centers: [222, 335, 449, 562, 676, 789, 902, 1016]
+
+  DQ:
+    bit_label_y: 178
+    address_y: 157
+    device_tag_y: 148
+    desc_y_start: 682
+    desc_y_end: 715
+    bit_label: "DO Bit"
+    columns: 8
+    col_centers: [222, 335, 449, 562, 676, 789, 902, 1016]
+
+  SAFETY_IN:
+    bit_label_y: 571
+    address_y: 589
+    device_tag_y: 598
+    desc_y_start: 675
+    desc_y_end: 715
+    bit_label: "DI Bit"
+    columns: 8
+    col_centers: [222, 335, 449, 562, 676, 789, 902, 1016]
+
+  SAFETY_OUT:
+    bit_label_y: 178
+    address_y: 157
+    desc_y_start: 682
+    desc_y_end: 715
+    bit_label: "DQ-P"
+    columns: 8
+    col_centers: [222, 335, 449, 562, 676, 789, 902, 1016]
+
+# ========== 页眉噪声清洗 ==========
+noise_patterns:
+  - "日期\\s+设计\\s+审核\\s+批准\\s*"
+  - "徐工基地\\s+徐工\\s*"
+  - "江苏烽禾升智能科技有限公\\s*司\\s*"
+  - "项目编号:\\s*[^\\n]*"
+  - "项目描述:\\s*[^\\n]*"
+  - "页描述:\\s*图纸号:\\s*"
+  - "数字量(输入|输出)模块 16位\\s+(DI|DQ)\\d+\\.0-(DI|DQ)\\d+\\.7\\s*"
+  - "安全输入模块 8位\\s+FDI\\d+\\.0-DI\\d+\\.7\\s*"
+  - "安全输出模块 4位\\s+DQ1110\\.0-DQ1110\\.7\\s*"
+
+# ========== I/O定义页面 ==========
+io_pages:
+  DI:
+    - [86, 97]    # DI1000.0 ~ DI1011.7  (12页 × 8通道 = 96点)
+  DQ:
+    - [98, 103]   # DQ1000.0 ~ DQ1005.7  (6页 × 8通道 = 48点)
+  SAFETY_IN:
+    - [75, 75]    # FDI1050.0 ~ DI1050.7  (奇偶页，共5页)
+    - [77, 77]
+    - [79, 79]
+    - [81, 81]
+    - [83, 83]
+  SAFETY_OUT:
+    - [85, 85]    # DQ1110.0 ~ DQ1110.7  (1页 × 4通道 = 4点)
