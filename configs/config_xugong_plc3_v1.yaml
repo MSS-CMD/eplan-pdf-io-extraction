@@ -1,0 +1,11 @@
+# EPLAN PDF I/O config v1.0
+page_detect:
+  DI: ['数字量输入模块 16位']
+  DQ: ['数字量输出模块 16位']
+  SAFETY_IN: ['安全输入模块 8位']
+  SAFETY_OUT: ['安全输出模块 4位']
+page_layout:
+  DI: {bit_label_y: 571, address_y: 589, columns: 8, col_centers: [222,335,449,562,676,789,902,1016]}
+  DQ: {bit_label_y: 178, address_y: 157, columns: 8, col_centers: [222,335,449,562,676,789,902,1016]}
+  SAFETY_IN: {bit_label_y: 571, address_y: 589, columns: 8}
+  SAFETY_OUT: {bit_label_y: 178, address_y: 157, bit_label: DQ-P, columns: 8}
