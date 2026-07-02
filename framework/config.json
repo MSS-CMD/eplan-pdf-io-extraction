@@ -1,1 +1,122 @@
-{"页面类型关键词":{"DI":["数字量输入模块 16位"],"DQ":["数字量输出模块 16位"],"SAFETY_IN":["安全输入模块"],"SAFETY_OUT":["安全输出模块"],"IOLINK":["IOLINK_数字量可分配模块"],"VALVE":["阀岛阀片总览"],"AI":["模拟量输入"]},"列布局模板":{"EPLAN_16位标准":{"DI":{"bit_label_re":"^(DI|FDI) Bit (\\d+)$","address_re":"^I\\d{4}\\.\\d$","bit_label_y":571,"address_y_range":[580,605],"device_tag_y_range":[590,615],"desc_y_range":[665,715]},"DQ":{"bit_label_re":"^DO Bit (\\d+)$","address_re":"^Q\\d{4}\\.\\d$","bit_label_y":178,"address_y_range":[148,172],"device_tag_y_range":[140,160],"desc_y_range":[665,715]}}},"安全输出布局":{"bit_label_re":"^DQ-P(\\d+)\\.?$","address_re":"^Q1110\\.\\d$","bit_label_y":178,"address_y_range":[148,172],"desc_y_range":[665,715]},"IOLINK模式检测":{"signal_pattern":"S\\d{4}_","search_radius_x":450,"search_radius_y":120},"阀岛布局":{"address_pattern":"^Q17\\d{3}\\.\\d$","signal_pattern":"^C\\d{4}_","match_radius_y":20}}
+{
+  "页面类型关键词": {
+    "DI": [
+      "数字量输入模块 16位"
+    ],
+    "DQ": [
+      "数字量输出模块 16位"
+    ],
+    "SAFETY_IN": [
+      "安全输入模块"
+    ],
+    "SAFETY_OUT": [
+      "安全输出模块"
+    ],
+    "IOLINK": [
+      "IOLINK_数字量可分配模块"
+    ],
+    "VALVE": [
+      "阀岛阀片总览"
+    ],
+    "AI": [
+      "模拟量输入"
+    ]
+  },
+  "列布局模板": {
+    "EPLAN_16位标准": {
+      "DI": {
+        "bit_label_re": "^(DI|FDI) Bit (\\d+)$",
+        "address_re": "^I\\d{4}\\.\\d$",
+        "bit_label_y": 571,
+        "address_y_range": [
+          580,
+          605
+        ],
+        "device_tag_y_range": [
+          590,
+          615
+        ],
+        "desc_y_range": [
+          665,
+          715
+        ]
+      },
+      "DQ": {
+        "bit_label_re": "^DO Bit (\\d+)$",
+        "address_re": "^Q\\d{4}\\.\\d$",
+        "bit_label_y": 178,
+        "address_y_range": [
+          148,
+          172
+        ],
+        "device_tag_y_range": [
+          140,
+          160
+        ],
+        "desc_y_range": [
+          665,
+          715
+        ]
+      }
+    },
+    "PLC1_EPLAN": {
+      "DI": {
+        "bit_label_re": "^(DI|FDI) Bit (\\d+)$",
+        "address_re": "^I\\d{4}\\.\\d$",
+        "bit_label_y": 571.1,
+        "address_y_range": [
+          579.7,
+          599.7
+        ],
+        "device_tag_y_range": [
+          590.4,
+          606.4
+        ],
+        "desc_y_range": [
+          676.8,
+          716.8
+        ]
+      },
+      "DQ": {
+        "bit_label_re": "^DO Bit (\\d+)$",
+        "address_re": "^Q\\d{4}\\.\\d$",
+        "bit_label_y": 177.9,
+        "address_y_range": [
+          146.9,
+          166.9
+        ],
+        "device_tag_y_range": [
+          140.1,
+          156.1
+        ],
+        "desc_y_range": [
+          676.8,
+          716.8
+        ]
+      }
+    }
+  },
+  "安全输出布局": {
+    "bit_label_re": "^DQ-P(\\d+)\\.?$",
+    "address_re": "^Q1110\\.\\d$",
+    "bit_label_y": 178,
+    "address_y_range": [
+      148,
+      172
+    ],
+    "desc_y_range": [
+      665,
+      715
+    ]
+  },
+  "IOLINK模式检测": {
+    "signal_pattern": "S\\d{4}_",
+    "search_radius_x": 450,
+    "search_radius_y": 120
+  },
+  "阀岛布局": {
+    "address_pattern": "^Q17\\d{3}\\.\\d$",
+    "signal_pattern": "^C\\d{4}_",
+    "match_radius_y": 20
+  }
+}
