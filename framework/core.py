@@ -8,21 +8,12 @@ _config={}
 if os.path.exists(_cfg_path):
     with open(_cfg_path,encoding="utf-8") as f: _config=json.load(f)
 _PAGE_KW=_config.get("页面类型关键词",{"DI":["数字量输入模块 16位"],"DQ":["数字量输出模块 16位"],"SAFETY_IN":["安全输入模块"],"SAFETY_OUT":["安全输出模块"],"IOLINK":["IOLINK_数字量可分配模块"],"VALVE":["阀岛阀片总览"],"AI":["模拟量输入"]})
-_COL_LAYOUTS=_config.get("列布局模板",{"EPLAN_16位标准":{"DI":{"bit_label_re":r"^(DI|FDI) Bit (\d+)$","address_re":r"^I\d{4}\.\d$","bit_label_y":571,"address_y_range":[580,605],"device_tag_y_range":[590,615],"desc_y_range":[665,715]},"DQ":{"bit_label_re":r"^DO Bit (\d+)$","address_re":r"^Q\d{4}\.\d$","bit_label_y":178,"address_y_range":[148,172],"device_tag_y_range":[140,160],"desc_y_range":[665,715]}}})
+_COL_LAYOUTS=_config.get("列布局模板",{"EPLAN_S7_1500_标准":{"DI":{"bit_label_re":r"^(DI|FDI) Bit (\d+)$","address_re":r"^I\d{4}\.\d$","bit_label_y":571,"address_y_range":[580,605],"device_tag_y_range":[590,615],"desc_y_range":[665,715]},"DQ":{"bit_label_re":r"^DO Bit (\d+)$","address_re":r"^Q\d{4}\.\d$","bit_label_y":178,"address_y_range":[148,172],"device_tag_y_range":[140,160],"desc_y_range":[665,715]}}})
 _SO_CFG=_config.get("安全输出布局",{"bit_label_re":r"^DQ-P(\d+)\.?$","address_re":r"^Q1110\.\d$","bit_label_y":178,"address_y_range":[148,172],"desc_y_range":[665,715]})
 _IOL_CFG=_config.get("IOLINK模式检测",{"signal_pattern":r"S\d{4}_","search_radius_x":450,"search_radius_y":120})
 _parsers={}
 def register(pt,fn): _parsers[pt]=fn
 def get_parser(pt): return _parsers.get(pt)
-
-def save_template(template_name, di_cfg=None, dq_cfg=None):
-    """保存检测到的参数为新模板"""
-    _COL_LAYOUTS[template_name] = {}
-    if di_cfg: _COL_LAYOUTS[template_name]["DI"] = {k:v for k,v in di_cfg.items() if k in ("bit_label_re","address_re","bit_label_y","address_y_range","device_tag_y_range","desc_y_range")}
-    if dq_cfg: _COL_LAYOUTS[template_name]["DQ"] = {k:v for k,v in dq_cfg.items() if k in ("bit_label_re","address_re","bit_label_y","address_y_range","device_tag_y_range","desc_y_range")}
-    _config["列布局模板"] = _COL_LAYOUTS
-    with open(_cfg_path,"w",encoding="utf-8") as f: json.dump(_config,f,ensure_ascii=False,indent=2)
-    print("  已保存模板:", template_name)
 
 def auto_discover(doc):
     pm={k:[] for k in _PAGE_KW}
@@ -93,9 +84,8 @@ def _match_tmpl(items,io_type):
             if bits and abs(sum(bits)/len(bits)-cfg["bit_label_y"])<15: return tname,cfg
     return None,None
 
-def auto_config(doc,pm,project_name=None):
-    """自动检测布局，新模板自动保存到config.json"""
-    configs={}; di_cfg=None; dq_cfg=None; tmpl_name=None
+def auto_config(doc,pm):
+    configs={}
     for pt in ("DI","DQ"):
         if not pm.get(pt): continue
         items=_get_items(doc[pm[pt][0]-1])
@@ -103,9 +93,7 @@ def auto_config(doc,pm,project_name=None):
         if det: det["io_type"]=pt; configs[pt]=det
         else:
             tn,tmpl=_match_tmpl(items,pt)
-            if tmpl: configs[pt]={**tmpl,"io_type":pt}; tmpl_name=tn
-        if pt=="DI" and configs.get("DI"): di_cfg=configs["DI"]
-        if pt=="DQ" and configs.get("DQ"): dq_cfg=configs["DQ"]
+            if tmpl: configs[pt]={**tmpl,"io_type":pt}
     if pm.get("SAFETY_IN"):
         items=_get_items(doc[pm["SAFETY_IN"][0]-1])
         det=_detect_di(items)
@@ -125,9 +113,6 @@ def auto_config(doc,pm,project_name=None):
         configs["IOLINK"]={"mode":"signal" if re.search(_IOL_CFG.get("signal_pattern",r"S\d{4}_"),s) else "connector"}
     if pm.get("VALVE"): configs["VALVE"]={"layout":"table","io_type":"阀岛(FDQ)","module_name":"阀岛"}
     if pm.get("AI"): configs["AI"]={"io_type":"AI"}
-    # 如果检测到新参数且不是已有模板，自动保存
-    if project_name and di_cfg and not tmpl_name:
-        save_template(project_name, di_cfg=di_cfg, dq_cfg=dq_cfg)
     return configs
 
 def extract_all(doc,pm,configs):
