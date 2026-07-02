@@ -3,7 +3,6 @@
 import json,os,re,sys
 from collections import Counter
 
-# 优先读exe同目录的config.json，没有则用嵌入的
 _cfg_path=os.path.join(os.path.dirname(__file__),"config.json")
 if getattr(sys,'frozen',False):
     _exe_cfg=os.path.join(os.path.dirname(sys.executable),"config.json")
@@ -140,13 +139,11 @@ def apply_pipeline(records,pipeline=None):
 def sort_records(records):
     def key(r):
         a=r.get("address","")
-        m=re.match(r"I(\d{4})\.(\d)",a)
-        if m: return (0,int(m.group(1)),int(m.group(2)))
-        m=re.match(r"Q(\d{4})\.(\d)",a)
-        if m: return (1,int(m.group(1)),int(m.group(2)))
-        m=re.match(r"Q17(\d{3})\.(\d)",a)
+        m=re.match(r"([IQ])(\d+)\.(\d)$",a)
+        if m: return (0 if m.group(1)=="I" else 1, int(m.group(2)), int(m.group(3)))
+        m=re.match(r"Q17(\d+)\.(\d)",a)
         if m: return (2,int(m.group(1)),int(m.group(2)))
-        m=re.match(r"PIW(\d{4})",a)
+        m=re.match(r"P[I][WQ]W?(\d+)",a)
         if m: return (3,int(m.group(1)),0)
         return (9,0,0)
     records.sort(key=key)
