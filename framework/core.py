@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
-"""Core engine v2.3"""
-import json,os,re
+"""Core engine v2.4 - external config.json support"""
+import json,os,re,sys
 from collections import Counter
 
+# 优先读exe同目录的config.json，没有则用嵌入的
 _cfg_path=os.path.join(os.path.dirname(__file__),"config.json")
+if getattr(sys,'frozen',False):
+    _exe_cfg=os.path.join(os.path.dirname(sys.executable),"config.json")
+    if os.path.exists(_exe_cfg): _cfg_path=_exe_cfg
 _config={}
 if os.path.exists(_cfg_path):
     with open(_cfg_path,encoding="utf-8") as f: _config=json.load(f)
+
 _PAGE_KW=_config.get("页面类型关键词",{"DI":["数字量输入模块 16位"],"DQ":["数字量输出模块 16位"],"SAFETY_IN":["安全输入模块"],"SAFETY_OUT":["安全输出模块"],"IOLINK":["IOLINK_数字量可分配模块"],"VALVE":["阀岛阀片总览"],"AI":["模拟量输入"]})
 _COL_LAYOUTS=_config.get("列布局模板",{"EPLAN_S7_1500_标准":{"DI":{"bit_label_re":r"^(DI|FDI) Bit (\d+)$","address_re":r"^I\d{4}\.\d$","bit_label_y":571,"address_y_range":[580,605],"device_tag_y_range":[590,615],"desc_y_range":[665,715]},"DQ":{"bit_label_re":r"^DO Bit (\d+)$","address_re":r"^Q\d{4}\.\d$","bit_label_y":178,"address_y_range":[148,172],"device_tag_y_range":[140,160],"desc_y_range":[665,715]}}})
 _SO_CFG=_config.get("安全输出布局",{"bit_label_re":r"^DQ-P(\d+)\.?$","address_re":r"^Q1110\.\d$","bit_label_y":178,"address_y_range":[148,172],"desc_y_range":[665,715]})
