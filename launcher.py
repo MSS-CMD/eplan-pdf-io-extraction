@@ -14,8 +14,6 @@ def main():
         pdf=filedialog.askopenfilename(title='Select EPLAN PDF',filetypes=[('PDF','*.pdf')])
         root.destroy()
     if not pdf or not os.path.exists(pdf): return
-    # 用文件名作为项目名，传入run_extract
-    pn=os.path.splitext(os.path.basename(pdf))[0][:30]
-    subprocess.call([sys.executable,ex,pdf,pn])
+    subprocess.call([sys.executable,ex,pdf])
 
 if __name__=="__main__": main()
