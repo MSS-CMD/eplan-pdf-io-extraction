@@ -1,0 +1,62 @@
+{
+  "说明": "EPLAN图纸模板配置。不同模板图纸，在列布局模板中加条目即可。",
+
+  "页面类型关键词": {
+    "DI_DO": ["数字量输入模块 16位", "数字量输出模块 16位"],
+    "SAFETY_IN": ["安全输入模块"],
+    "SAFETY_OUT": ["安全输出模块"],
+    "IOLINK": ["IOLINK_数字量可分配模块"],
+    "BALLUFF": ["BALLUFF IO-Link", "IO-Link 输入/输出", "IO-Link 从站模块"],
+    "VALVE": ["阀岛阀片总览"],
+    "AI": ["模拟量输入"]
+  },
+
+  "列布局模板": {
+    "EPLAN_S7_1500_标准": {
+      "说明": "S7-1500系列，16位模块，8列Bit标签布局。适用：徐工CTP4.0系列(PLC1/3/7)",
+      "DI": {
+        "bit_label_re": "^(DI|FDI) Bit (\\d+)$",
+        "address_re": "^I\\d{4}\\.\\d$",
+        "bit_label_y": 571,
+        "address_y_range": [580, 605],
+        "device_tag_y_range": [590, 615],
+        "desc_y_range": [665, 715]
+      },
+      "DQ": {
+        "bit_label_re": "^DO Bit (\\d+)$",
+        "address_re": "^Q\\d{4}\\.\\d$",
+        "bit_label_y": 178,
+        "address_y_range": [148, 172],
+        "device_tag_y_range": [140, 160],
+        "desc_y_range": [665, 715]
+      }
+    },
+    "BYD_BALLUFF": {
+      "说明": "比亚迪/BALLUFF IO-Link分布式模块，PORT布局。适用：比亚迪360KW电驱线(PLC30)",
+      "BALLUFF": {
+        "address_re": "^[IQ]\\d{3,4}\\.\\d$",
+        "port_radius_y": 50
+      }
+    }
+  },
+
+  "安全输出布局": {
+    "bit_label_re": "^DQ-P(\\d+)\\.?$",
+    "address_re": "^Q1110\\.\\d$",
+    "bit_label_y": 178,
+    "address_y_range": [148, 172],
+    "desc_y_range": [665, 715]
+  },
+
+  "IOLINK模式检测": {
+    "signal_pattern": "S\\d{4}_",
+    "search_radius_x": 450,
+    "search_radius_y": 120
+  },
+
+  "阀岛布局": {
+    "address_pattern": "^Q17\\d{3}\\.\\d$",
+    "signal_pattern": "^C\\d{4}_",
+    "match_radius_y": 20
+  }
+}
