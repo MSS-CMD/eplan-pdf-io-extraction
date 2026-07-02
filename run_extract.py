@@ -7,8 +7,8 @@ import pymupdf
 from framework.core import auto_discover,auto_config,extract_all,sort_records,apply_pipeline,register
 from framework.utils.excel import generate_excel
 from framework.utils.text import postprocess_desc
-from framework.parsers import column,iolink,valve,analog
-for t,p in [("DI",column),("DQ",column),("SAFETY_IN",column),("SAFETY_OUT",column),("IOLINK",iolink),("VALVE",valve),("AI",analog)]: register(t,p.parse)
+from framework.parsers import column,iolink,valve,analog,balluff
+for t,p in [("DI",column),("DQ",column),("SAFETY_IN",column),("SAFETY_OUT",column),("IOLINK",iolink),("VALVE",valve),("AI",analog),("BALLUFF",balluff)]: register(t,p.parse)
 
 def run(pdf_path,project_name=None):
     t0=time.time()
