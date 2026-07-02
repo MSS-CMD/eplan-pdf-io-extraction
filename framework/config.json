@@ -1,120 +1,72 @@
 {
+  "说明": "EPLAN图纸模板配置。不同模板的图纸，添加新条目即可，不动Python代码。",
+
   "页面类型关键词": {
-    "DI": [
-      "数字量输入模块 16位"
-    ],
-    "DQ": [
-      "数字量输出模块 16位"
-    ],
-    "SAFETY_IN": [
-      "安全输入模块"
-    ],
-    "SAFETY_OUT": [
-      "安全输出模块"
-    ],
-    "IOLINK": [
-      "IOLINK_数字量可分配模块"
-    ],
-    "VALVE": [
-      "阀岛阀片总览"
-    ],
-    "AI": [
-      "模拟量输入"
-    ]
+    "DI": ["数字量输入模块 16位"],
+    "DQ": ["数字量输出模块 16位"],
+    "SAFETY_IN": ["安全输入模块"],
+    "SAFETY_OUT": ["安全输出模块"],
+    "IOLINK": ["IOLINK_数字量可分配模块"],
+    "VALVE": ["阀岛阀片总览"],
+    "AI": ["模拟量输入"]
   },
+
   "列布局模板": {
-    "EPLAN_16位标准": {
+    "EPLAN_S7_1500_标准": {
+      "说明": "S7-1500系列，16位模块，8列布局。适用项目：PLC1/PLC3/PLC7",
       "DI": {
         "bit_label_re": "^(DI|FDI) Bit (\\d+)$",
         "address_re": "^I\\d{4}\\.\\d$",
         "bit_label_y": 571,
-        "address_y_range": [
-          580,
-          605
-        ],
-        "device_tag_y_range": [
-          590,
-          615
-        ],
-        "desc_y_range": [
-          665,
-          715
-        ]
+        "address_y_range": [580, 605],
+        "device_tag_y_range": [590, 615],
+        "desc_y_range": [665, 715]
       },
       "DQ": {
         "bit_label_re": "^DO Bit (\\d+)$",
         "address_re": "^Q\\d{4}\\.\\d$",
         "bit_label_y": 178,
-        "address_y_range": [
-          148,
-          172
-        ],
-        "device_tag_y_range": [
-          140,
-          160
-        ],
-        "desc_y_range": [
-          665,
-          715
-        ]
+        "address_y_range": [148, 172],
+        "device_tag_y_range": [140, 160],
+        "desc_y_range": [665, 715]
       }
     },
-    "PLC1_EPLAN": {
+    "S7_1200_紧凑型": {
+      "说明": "S7-1200系列，地址格式 %IW0.0 / %QW0.0（示例模板，未验证）",
       "DI": {
-        "bit_label_re": "^(DI|FDI) Bit (\\d+)$",
-        "address_re": "^I\\d{4}\\.\\d$",
-        "bit_label_y": 571.1,
-        "address_y_range": [
-          579.7,
-          599.7
-        ],
-        "device_tag_y_range": [
-          590.4,
-          606.4
-        ],
-        "desc_y_range": [
-          676.8,
-          716.8
-        ]
+        "bit_label_re": "^(DI) Bit (\\d+)$",
+        "address_re": "^%IW\\d+\\.\\d$",
+        "bit_label_y": 571,
+        "address_y_range": [580, 605],
+        "desc_y_range": [665, 715]
       },
       "DQ": {
         "bit_label_re": "^DO Bit (\\d+)$",
-        "address_re": "^Q\\d{4}\\.\\d$",
-        "bit_label_y": 177.9,
-        "address_y_range": [
-          146.9,
-          166.9
-        ],
-        "device_tag_y_range": [
-          140.1,
-          156.1
-        ],
-        "desc_y_range": [
-          676.8,
-          716.8
-        ]
+        "address_re": "^%QW\\d+\\.\\d$",
+        "bit_label_y": 178,
+        "address_y_range": [148, 172],
+        "desc_y_range": [665, 715]
       }
     }
   },
+
   "安全输出布局": {
+    "说明": "ET200SP F-DQ 4通道安全输出模块",
     "bit_label_re": "^DQ-P(\\d+)\\.?$",
     "address_re": "^Q1110\\.\\d$",
     "bit_label_y": 178,
-    "address_y_range": [
-      148,
-      172
-    ],
-    "desc_y_range": [
-      665,
-      715
-    ]
+    "address_y_range": [148, 172],
+    "desc_y_range": [665, 715]
   },
+
   "IOLINK模式检测": {
     "signal_pattern": "S\\d{4}_",
     "search_radius_x": 450,
     "search_radius_y": 120
   },
+
   "阀岛布局": {
+    "说明": "亚德客阀岛，CXXXX_信号名，左右列表格",
     "address_pattern": "^Q17\\d{3}\\.\\d$",
     "signal_pattern": "^C\\d{4}_",
     "match_radius_y": 20
