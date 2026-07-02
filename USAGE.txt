@@ -1,0 +1,17 @@
+EPLAN I/O 自动提取工具
+========================
+
+用法：
+  方式一：把 PDF 文件拖到 EPLAN_IO_Extract.exe 上松开
+  方式二：双击 exe → 选文件 → 自动提取
+
+输出：
+  在 PDF 同目录生成 xxx_IO_总表.xlsx
+
+包含3个工作表：
+  · PLC IO 总表   — I/O点明细（地址/类型/描述）
+  · 汇总统计       — 按类型统计点数
+  · 设备清单       — 设备分组
+
+无需安装 Python，开箱即用。
+源码和更新：https://github.com/MSS-CMD/eplan-pdf-io-extraction
