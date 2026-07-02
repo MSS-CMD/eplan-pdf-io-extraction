@@ -10,7 +10,7 @@ from framework.utils.text import postprocess_desc
 from framework.parsers import column,iolink,valve,analog
 for t,p in [("DI",column),("DQ",column),("SAFETY_IN",column),("SAFETY_OUT",column),("IOLINK",iolink),("VALVE",valve),("AI",analog)]: register(t,p.parse)
 
-def run(pdf_path):
+def run(pdf_path,project_name=None):
     t0=time.time()
     doc=pymupdf.open(pdf_path)
     print("\n[1] Scanning... ({} pages)".format(doc.page_count),flush=True)
@@ -18,7 +18,7 @@ def run(pdf_path):
     for pt,pages in sorted(pm.items()):
         if pages: print("    {}: {} pages".format(pt,len(pages)))
     print("[2] Detecting layout...",flush=True)
-    cfgs=auto_config(doc,pm)
+    cfgs=auto_config(doc,pm,project_name)
     total=sum(len(v) for v in pm.values())
     print("[3] Extracting ({} pages)...".format(total),flush=True)
     records=extract_all(doc,pm,cfgs)
@@ -35,5 +35,6 @@ def run(pdf_path):
     print("\nOutput: "+output+"\nTime: {:.0f}s".format(time.time()-t0))
 
 if __name__=="__main__":
-    if len(sys.argv)<2: print("Usage: python run_extract.py <pdf_path>"); sys.exit(1)
-    run(sys.argv[1])
+    if len(sys.argv)<2: print("Usage: python run_extract.py <pdf_path> [project_name]"); sys.exit(1)
+    pn=sys.argv[2] if len(sys.argv)>2 else None
+    run(sys.argv[1],pn)
